@@ -1,0 +1,182 @@
+function init(self)
+
+	self.button1 = gui.get_node("button")
+	--self.button2 = gui.get_node("textLevelSelect")
+--	self.button3 = gui.get_node("textExitGame")
+
+	self.is_over1 = false 
+	self.is_over2 = false 
+	self.is_over3 = false 
+
+end
+
+
+local function load_levelUnlock(self)
+	msg.post("go#levelSelect", "load")
+
+end
+
+local function load_level5(self)
+	msg.post("go#level5", "load")
+	msg.post("go#level5", "enable")
+end
+
+local function load_level4(self)
+	msg.post("go#level4", "load")
+	msg.post("go#level4", "enable")
+end
+
+local function unload_level4(self)
+	msg.post("go#level4", "unload")
+end
+
+local function unload_level1(self)
+	msg.post("go#level1", "unload")
+end
+
+local function load_level3(self)
+	msg.post("go#level3", "load")
+	msg.post("go#level3", "enable")
+end
+
+local function unload_level3(self)
+	msg.post("go#level3", "unload")
+end
+
+
+local function load_level2(self)
+	msg.post("go#level2", "load")
+	msg.post("go#level2", "enable")
+end
+
+local function load_level1(self)
+	msg.post("go#level1", "load")
+	msg.post("go#level1", "enable")
+end
+
+
+local function unload_level2(self)
+	msg.post("go#level2", "unload")
+end
+
+local function unload_level5(self)
+	msg.post("go#level5", "unload")
+end
+
+local function load_levelSelect(self)
+	msg.post("go#levelSelect", "load")
+	msg.post("go#levelSelect", "enable")
+end
+local function load_menu(self)
+	msg.post("go#menu", "load")
+	msg.post("go#menu", "enable")
+end
+local function unload_menu(self)
+	msg.post("go#menu","unload")
+end
+
+local function unload_levelSelect(self)
+	msg.post("go#levelSelect","unload")
+end
+
+local function load_main(self)
+	msg.post("go#menu", "load")
+	msg.post("go#menu", "enable")
+end
+
+local function unload_main(self)
+	msg.post("go#menu", "unload")
+
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	load_menu(self)
+end
+function on_message(self, message_id, message, sender)
+	if message_id == hash("start_game") then
+	print("got it")
+		unload_menu(self)
+		load_level1(self)
+	end
+	if message_id == hash("level_select") then
+		unload_menu(self)
+		load_levelSelect(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("settings") then
+		unload_main(self)
+		load_levelSelect(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("settings2") then
+		unload_level2(self)
+		load_levelSelect(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("settings3") then
+		unload_level3(self)
+		load_levelSelect(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("settings4") then
+		unload_level4(self)
+		load_levelSelect(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("settings5") then
+		unload_level5(self)
+		load_levelSelect(self)
+		print("CLICK!")
+	end
+
+
+
+	if message_id == hash("level_one") then
+		unload_levelSelect(self)
+		load_main(self)
+		print("CLICK!")
+	end
+
+
+	if message_id == hash("level_two")  then
+		unload_level1(self)
+		load_level2(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("level_three") then
+		unload_levelSelect(self)
+		load_level3(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("level_four") then
+		unload_levelSelect(self)
+		load_level4(self)
+		print("CLICK!")
+	end
+
+
+	if message_id == hash("level_five") then
+		unload_levelSelect(self)
+		load_level5(self)
+		print("CLICK!")
+	end
+
+	if message_id == hash("unlock2") then
+		print("you already know we got it to work")
+		load_levelUnlock(self)
+		print("CLICK!")
+	end
+
+
+
+end
+
+

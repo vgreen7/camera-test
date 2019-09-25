@@ -1,0 +1,61 @@
+local min_y = 30
+local max_y = 680
+local min_x = 30
+local max_x = 1225
+
+
+function init(self)
+	msg.post(".", "acquire_input_focus") 
+	self.vel = vmath.vector3()     
+
+end
+
+function update(self, dt)
+	local pos = go.get_position() 
+	pos = pos + self.vel * dt 
+
+	self.vel.x = 0
+	self.vel.y = -200
+
+	if pos.y < min_y then
+		pos.y = min_y
+	elseif pos.y > max_y then
+		pos.y = max_y
+	end
+
+	if pos.x < min_x then
+		pos.x = min_x
+	elseif pos.x > max_x then
+		pos.x = max_x
+	end
+	go.set_position(pos) 
+	self.vel.x=0
+
+end
+
+function on_message(self, message_id, message, sender)
+	--Handle collision
+	if message_id == hash("contact_point_response") then
+		--local newpos = go.get_position() + message.normal * message.distance
+		--go.set_position(newpos)
+		self.vel.y=0
+	end
+end
+
+
+
+function on_input(self, action_id, action)
+	if action_id == hash("up") then
+		self.vel.y = 400
+	elseif action_id == hash("down") then
+		self.vel.y = -400
+	elseif action_id == hash("left") then
+		self.vel.x = -400
+		sprite.set_hflip("#sprite", false)
+	elseif action_id == hash("right") then
+		self.vel.x = 400
+		sprite.set_hflip("#sprite", true)
+	elseif action_id == hash("down") then
+		self.vel.y = -400
+	end
+end

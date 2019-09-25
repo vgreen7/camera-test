@@ -1,0 +1,7 @@
+function on_message(self, message_id, message, sender)
+	if message_id == hash("collision_response") then
+		msg.post("loader:/go#loader", "level_two")
+		print("level2")
+	end
+end
+		
